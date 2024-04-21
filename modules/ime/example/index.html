@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IME TextEditor</title>
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <link rel="stylesheet" href="/css/latn.css">
+    <script type="module" src="/npm/esm/mod.js"></script>
+    <script type="module" src="/js/main.js"></script>
+</head>
+
+<body>
+
+<h1>Edit text</h1>
+
+<div class="container">
+  <form>
+    <div class="row">
+      <button id="downloadButton" class="btn round"><i class="fa fa-download"></i></button>
+      <button id="copyButton" class="btn round"><i class="fa fa-copy"></i></button>
+      <button id="resetButton" class="btn round"><i class="fa fa-times"></i></button>
+    </div>
+    <br />
+    <div class="row">
+      <textarea id="textEditor" name="Tekst" placeholder="Example text..." style="height:600px"></textarea>
+    </div>
+  </form>
+</div>
+
+<script type="module">
+    import { onLoad } from '/js/main.js';
+    window.downloadFileName = 'text-ime.md';
+    window.onload = onLoad;
+</script>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+version: '3.8'
+
+networks:
+  langforge:
+    external: false
+
+services:
+
+  postgres:
+    image: postgres
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    networks:
+      - langforge
+    ports:
+      - 5432:5432
+    volumes:
+      - type: volume
+        source: postgres
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: ./prisma/init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "langforge"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=pgadmin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin
+    networks:
+      - langforge
+    ports:
+      - 5433:80
+    volumes:
+      - type: volume
+        source: pgadmin
+        target: /var/lib/pgadmin
+    depends_on:
+      - postgres
+
+  # application:
+  #   build:
+  #     context: .
+  #   hostname: application
+  #   restart: always
+  #   environment:
+  #     - DATABASE_URL="postgresql://langforge:langforge@postgres:5432/langforge?schema=public"
+
+volumes:
+  postgres:
+  pgadmin:
