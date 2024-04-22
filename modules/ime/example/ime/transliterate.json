@@ -5,6 +5,7 @@
     "description": "Example IME used for development",
     "version": "0.1",
     "data": [
+        [ "cxax", "ĉą" ],
         [ "cx", "ĉ" ],
         [ "gx", "ĝ" ],
         [ "hx", "ĥ" ],
@@ -22,6 +23,7 @@
         [ "HX", "Ĥ" ],
         [ "JX", "Ĵ" ],
         [ "SX", "Ŝ" ],
-        [ "UX", "Ŭ" ]
+        [ "UX", "Ŭ" ],
+        [ "sxax", "ŝą" ]
     ]
 }

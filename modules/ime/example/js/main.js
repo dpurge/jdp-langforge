@@ -63,5 +63,5 @@ export async function onLoad()
     setTransliterateIME(ime, textEditor);
 
 	console.log("Hello from IME TextEdit!");
-    console.log(ime);
+    console.log(textEditor.ime.data);
 }

@@ -32,7 +32,7 @@ export function onTransliterateKeyUp(event) {
 
 export function onTransliterateKeyPress(event) {
 	if (event.key == "Enter") return;
-	
+
 	event.preventDefault();
 	let key = event.key;
 	
@@ -58,12 +58,37 @@ export function onTransliterateKeyPress(event) {
 	this.selectionEnd = this.selectionStart;
 }
 
+function sortImeData(a,b) {
+	return a[0].length - b[0].length;
+}
+
+function compileImeData(data) {
+	const result = [];
+
+	data.sort(sortImeData);
+
+	for (const i of data) {
+		let head = i[0].slice(0, -1);
+		const tail = i[0].slice(-1);
+
+		for (const j of result) {
+			if (head.startsWith(j[0])) {
+				head = j[1] + head.slice(j[0].length);
+			}
+		}
+
+		result.push([head+tail, i[1]])
+	}
+
+	return result;
+}
+
 
 
 export function setTransliterateIME(ime, editor) {
     editor.ime = {
       state: {shift:false, alt:false, ctrl:false},
-      data: ime.data
+      data: compileImeData(ime.data)
     }
 
     editor.onkeydown = onTransliterateKeyDown;
